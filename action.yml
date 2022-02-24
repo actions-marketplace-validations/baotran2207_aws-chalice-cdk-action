@@ -1,0 +1,9 @@
+name: AWS Chalice CDK Action
+description: Automatate deployment of your AWS Chalice with CDK via github actinons
+author: BaoTran <tranthanhbao2207@gmail.com>
+branding:
+  icon: cloud
+  color: yellow
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

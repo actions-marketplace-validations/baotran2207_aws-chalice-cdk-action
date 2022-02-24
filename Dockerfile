@@ -1,8 +1,21 @@
-# Container image that runs your code
-FROM python:3.9
+FROM python3.10-nodejs17
 
-# Copies your code file from your action repository to the filesystem path `/` of the container
+LABEL version="0.1"
+LABEL repository="https://github.com/baotran2207/aws-chalice-cdk-action"
+LABEL homepage="https://github.com/baotran2207/aws-chalice-cdk-action"
+LABEL maintainer="Bao Tran <tranthanhbao2207@gmail.com>"
+
 COPY entrypoint.sh /entrypoint.sh
 
-# Code file to execute when the docker container starts up (`entrypoint.sh`)
+
+RUN npm install -g aws-cdk
+
+
+RUN pip install --upgrade pip
+RUN pip install chalice chalice[cdk]
+RUN pip install -r requirements.txt
+RUN cd infrastructure
+RUN cdk bootstrap
+RUN cdk deploy
+
 ENTRYPOINT ["/entrypoint.sh"]
